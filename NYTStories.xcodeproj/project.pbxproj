@@ -21,6 +21,9 @@
 		257329E425F937E500067FC3 /* SecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 257329E225F937E500067FC3 /* SecondCell.xib */; };
 		257329E825F93A0900067FC3 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257329E725F93A0900067FC3 /* DataModel.swift */; };
 		257329EA25F93A5A00067FC3 /* NetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257329E925F93A5A00067FC3 /* NetManager.swift */; };
+		257329ED25F93CA500067FC3 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257329EB25F93CA500067FC3 /* DetailVC.swift */; };
+		257329EE25F93CA500067FC3 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 257329EC25F93CA500067FC3 /* DetailVC.xib */; };
+		257329F125F93DD600067FC3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257329F025F93DD600067FC3 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		257329E225F937E500067FC3 /* SecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondCell.xib; sourceTree = "<group>"; };
 		257329E725F93A0900067FC3 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		257329E925F93A5A00067FC3 /* NetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetManager.swift; sourceTree = "<group>"; };
+		257329EB25F93CA500067FC3 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		257329EC25F93CA500067FC3 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		257329F025F93DD600067FC3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257329F125F93DD600067FC3 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +65,7 @@
 			children = (
 				257329BD25F9317D00067FC3 /* NYTStories */,
 				257329BC25F9317D00067FC3 /* Products */,
+				257329EF25F93DD500067FC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +99,7 @@
 				257329D425F9325400067FC3 /* Cells */,
 				257329C225F9317E00067FC3 /* MainVC.swift */,
 				257329DD25F9369600067FC3 /* SecondVC.swift */,
+				257329EB25F93CA500067FC3 /* DetailVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -101,6 +110,7 @@
 				257329D925F9327700067FC3 /* Cells */,
 				257329C425F9317E00067FC3 /* Main.storyboard */,
 				257329DE25F9369600067FC3 /* SecondVC.xib */,
+				257329EC25F93CA500067FC3 /* DetailVC.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +147,14 @@
 				257329E925F93A5A00067FC3 /* NetManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		257329EF25F93DD500067FC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				257329F025F93DD600067FC3 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +218,7 @@
 				257329E025F9369600067FC3 /* SecondVC.xib in Resources */,
 				257329E425F937E500067FC3 /* SecondCell.xib in Resources */,
 				257329CB25F9318000067FC3 /* LaunchScreen.storyboard in Resources */,
+				257329EE25F93CA500067FC3 /* DetailVC.xib in Resources */,
 				257329C825F9318000067FC3 /* Assets.xcassets in Resources */,
 				257329D825F9326F00067FC3 /* MainCell.xib in Resources */,
 				257329C625F9317E00067FC3 /* Main.storyboard in Resources */,
@@ -218,6 +237,7 @@
 				257329E825F93A0900067FC3 /* DataModel.swift in Sources */,
 				257329DF25F9369600067FC3 /* SecondVC.swift in Sources */,
 				257329BF25F9317E00067FC3 /* AppDelegate.swift in Sources */,
+				257329ED25F93CA500067FC3 /* DetailVC.swift in Sources */,
 				257329EA25F93A5A00067FC3 /* NetManager.swift in Sources */,
 				257329D725F9326F00067FC3 /* MainCell.swift in Sources */,
 				257329C125F9317E00067FC3 /* SceneDelegate.swift in Sources */,

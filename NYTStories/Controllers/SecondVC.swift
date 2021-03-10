@@ -63,6 +63,13 @@ extension SecondVC: UITableViewDelegate{
         return 60
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+           let detailVC = DetailVC.init(nibName: "DetailVC", bundle: nil)
+           let url = stories[indexPath.row].url
+           detailVC.urlString = url
+               navigationController?.pushViewController(detailVC, animated: true)
+       }
 }
 
 extension SecondVC: UITableViewDataSource{
