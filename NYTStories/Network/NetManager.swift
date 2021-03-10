@@ -10,8 +10,9 @@ import Foundation
 
 class NetManager {
     
-    var newStories: Stories?
+    private var newStories: Stories?
     
+    //MARK: - Get data from API
     func doRequest(name: String, completion: @escaping(_ stories: Stories) -> Void){
 
         let key = "pQVbavHYAoGUTUS32VQfwm1rtBGp0lfb"
@@ -33,16 +34,13 @@ class NetManager {
         task.resume()
     }
     
-    
-    func parseJSON(withData data: Data){
-        
+    //MARK: - Parse json
+    private func parseJSON(withData data: Data){
         let decoder = JSONDecoder()
         
         do {
-            
             let stories = try decoder.decode(Stories.self, from: data)
             newStories = stories
-            
         } catch let error as NSError{
             print(error.localizedDescription)
         }

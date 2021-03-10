@@ -15,14 +15,41 @@ class SecondVC: UIViewController {
     
     var nameOfType: String?
     
-    var netManager = NetManager()
-    var stories: [Story] = []
+    private var netManager = NetManager()
+    private var stories: [Story] = []
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsOfTableView()
         settingsOfActivityIndicator()
+        getData()
+    }
     
+     //MARK: - Settings of tableView
+    private func settingsOfTableView(){
+        title = nameOfType?.capitalized
+        
+        tableView.register(UINib.init(nibName: "SecondCell", bundle: nil), forCellReuseIdentifier: "SecondCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.reloadData()
+    }
+    
+    //MARK: - Settings of activity indicator
+    private func settingsOfActivityIndicator(){
+        
+        activityIndicator.color = .black
+        activityIndicator.isHidden = true
+        activityIndicator.hidesWhenStopped = true
+        tableView.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    //MARK: - Get data from NetManager
+    private func getData(){
+        
         guard let nameOfType = nameOfType else { return }
         netManager.doRequest(name: nameOfType) { story in
             
@@ -35,28 +62,9 @@ class SecondVC: UIViewController {
             }
         }
     }
-    
-    func settingsOfTableView(){
-        title = nameOfType?.capitalized
-        
-        tableView.register(UINib.init(nibName: "SecondCell", bundle: nil), forCellReuseIdentifier: "SecondCell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .clear
-        tableView.reloadData()
-    }
-    
-    func settingsOfActivityIndicator(){
-        
-        activityIndicator.color = .black
-        activityIndicator.isHidden = true
-        activityIndicator.hidesWhenStopped = true
-        tableView.isHidden = true
-        activityIndicator.startAnimating()
-    }
-    
 }
 
+//MARK: - Extension UITableViewDelegate
 extension SecondVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,10 +80,10 @@ extension SecondVC: UITableViewDelegate{
        }
 }
 
+//MARK: - Extension UITableViewDataSource
 extension SecondVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return stories.count
     }
     

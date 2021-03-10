@@ -14,57 +14,66 @@ class DetailVC: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var webView: WKWebView!
     
-       var urlString: URL?
+    var urlString: URL?
+    
+    //MARK: - Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        settingsOfWebView()
+    }
+    
+    //MARK: - Settings of WebView
+    func settingsOfWebView(){
+        let request = URLRequest(url: urlString!)
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            let request = URLRequest(url: urlString!)
-            
-            webView.backgroundColor = .clear
-            webView.load(request)
-            webView.allowsBackForwardNavigationGestures = true
-            webView.navigationDelegate = self
-            webView.addObserver(self,
-                                forKeyPath: #keyPath(WKWebView.estimatedProgress),
-                                options: .new,
-                                context: nil)
-        }
+        webView.backgroundColor = .clear
+        webView.load(request)
+        webView.allowsBackForwardNavigationGestures = true
+        webView.navigationDelegate = self
+        webView.addObserver(self,
+                            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+                            options: .new,
+                            context: nil)
+    }
+    
+    //MARK: - Observe value
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
         
-        override func observeValue(forKeyPath keyPath: String?,
-                                   of object: Any?,
-                                   change: [NSKeyValueChangeKey : Any]?,
-                                   context: UnsafeMutableRawPointer?) {
-            
-            if keyPath == "estimatedProgress" {
-                progressView.progress = Float(webView.estimatedProgress)
-            }
-        }
-        
-        private func showProgressView() {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.progressView.alpha = 1
-            }, completion: nil)
-        }
-        
-        private func hideProgressView() {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                self.progressView.alpha = 0
-            }, completion: nil)
+        if keyPath == "estimatedProgress" {
+            progressView.progress = Float(webView.estimatedProgress)
         }
     }
+    
+    //MARK: - Show progress view
+    private func showProgressView() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.progressView.alpha = 1
+        }, completion: nil)
+    }
+    
+    //MARK: - Hide progress view
+    private func hideProgressView() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.progressView.alpha = 0
+        }, completion: nil)
+    }
+}
 
-    extension DetailVC: WKNavigationDelegate {
-        
-        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            showProgressView()
-        }
-        
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            hideProgressView()
-        }
-        
-        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            hideProgressView()
-        }
+//MARK: - Extension WKNavigationDelegate
+extension DetailVC: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        showProgressView()
     }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        hideProgressView()
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        hideProgressView()
+    }
+}

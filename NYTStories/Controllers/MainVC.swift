@@ -12,38 +12,41 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var arrayOfType = [""]
+    private var arrayOfType = [""]
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Top Stories"
         
         arrayOfType = ["arts", "automobiles", "books", "business", "fashion", "food", "health", "home", "insider", "magazine", "movies", "nyregion", "obituaries", "opinion", "politics", "realestate", "science", "sports", "sundayreview", "technology", "theater", "t-magazine", "travel", "upshot", "us", "world"]
         
         settingsOfTableView()
     }
     
-    func settingsOfTableView(){
-
-        title = "Top Stories"
-        tableView.register(UINib.init(nibName: "MainCell", bundle: nil), forCellReuseIdentifier: "MainCell")
+    //MARK: - Settings of tableView
+    private func settingsOfTableView(){
         
+        tableView.register(UINib.init(nibName: "MainCell", bundle: nil), forCellReuseIdentifier: "MainCell")
         tableView.delegate = self
         tableView.dataSource = self
     }
 }
 
+//MARK: - Extension UITableViewDelegate
 extension MainVC: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-            
-            let secondVC = SecondVC.init(nibName: "SecondVC", bundle: nil)
-            
-            let nameOfType = arrayOfType[indexPath.row]
-            secondVC.nameOfType = nameOfType
         
-            navigationController?.pushViewController(secondVC, animated: true)
+        let secondVC = SecondVC.init(nibName: "SecondVC", bundle: nil)
+        
+        let nameOfType = arrayOfType[indexPath.row]
+        secondVC.nameOfType = nameOfType
+        
+        navigationController?.pushViewController(secondVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,6 +54,7 @@ extension MainVC: UITableViewDelegate{
     }
 }
 
+//MARK: - Extension UITableViewDataSource
 extension MainVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,7 +69,7 @@ extension MainVC: UITableViewDataSource{
         cell.nameLabel.text = nameOfType.capitalized
         cell.nameLabel.font = UIFont(name: "TimesNewRomanPSMT", size: 22)
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-       
+        
         return cell
     }
 }
