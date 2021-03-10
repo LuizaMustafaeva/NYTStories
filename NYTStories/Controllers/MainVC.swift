@@ -37,6 +37,13 @@ extension MainVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+            
+            let secondVC = SecondVC.init(nibName: "SecondVC", bundle: nil)
+            
+            let nameOfType = arrayOfType[indexPath.row]
+            secondVC.nameOfType = nameOfType
+        
+            navigationController?.pushViewController(secondVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
