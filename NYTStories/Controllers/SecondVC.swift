@@ -15,12 +15,25 @@ class SecondVC: UIViewController {
     
     var nameOfType: String?
     
+    var netManager = NetManager()
+    var stories: [Story] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsOfTableView()
         settingsOfActivityIndicator()
     
-        
+        guard let nameOfType = nameOfType else { return }
+        netManager.doRequest(name: nameOfType) { story in
+            
+            self.stories = story.results!
+            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func settingsOfTableView(){
@@ -56,13 +69,13 @@ extension SecondVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return stories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
         
-        cell.nameLabel.text = ""
+        cell.nameLabel.text = stories[indexPath.row].title
         cell.nameLabel.font = UIFont(name: "TimesNewRomanPSMT", size: 18)
         cell.nameLabel.numberOfLines = 0
         
